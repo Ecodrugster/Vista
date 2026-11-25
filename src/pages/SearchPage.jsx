@@ -128,14 +128,23 @@ export function SearchPage() {
             className={`chip ${urlColor === bucket.id ? 'is-active' : ''}`}
             onClick={() => handleColorChange(bucket.id)}
           >
-            {bucket.label}
+            <span className={`chip-dot dot-${bucket.id}`} aria-hidden="true" />
+            <span>{bucket.label}</span>
           </button>
         ))}
       </div>
 
       {isLoading && (
-        <div className="status-box" role="status">
-          Загружаем работы из коллекции музея…
+        <div className="skeleton-grid" role="status" aria-label="Загружаем работы из коллекции музея">
+          {Array.from({ length: 8 }, (_, idx) => (
+            <div key={idx} className="skeleton-card">
+              <div className="skeleton-media" />
+              <div className="skeleton-lines">
+                <div className="skeleton-line is-title" />
+                <div className="skeleton-line is-sub" />
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
