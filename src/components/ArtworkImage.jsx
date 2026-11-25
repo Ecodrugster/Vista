@@ -30,25 +30,17 @@ export function ArtworkImage({
       {!isImageMissing && lqip && !isLoaded && (
         <img
           src={lqip}
-          alt=""
-          aria-hidden="true"
+          alt={isLoadError ? alt : ''}
+          aria-hidden={isLoadError ? undefined : true}
           className="artwork-lqip"
         />
       )}
 
-      {isImageMissing ? (
+      {isImageMissing || (isLoadError && !lqip) ? (
         <div className="artwork-placeholder" role="img" aria-label={alt}>
           <span>Нет изображения</span>
         </div>
-      ) : isLoadError ? (
-        <div
-          className={`artwork-placeholder ${lqip ? 'has-lqip' : ''}`}
-          role="img"
-          aria-label={alt}
-        >
-          <span>{lqip ? 'Превью (IIIF 403)' : 'Изображение недоступно'}</span>
-        </div>
-      ) : (
+      ) : !isLoadError ? (
         <img
           src={src}
           alt={alt}
@@ -58,7 +50,7 @@ export function ArtworkImage({
           onLoad={() => setLoadedSrc(src)}
           onError={() => setFailedSrc(src)}
         />
-      )}
+      ) : null}
     </div>
   );
 }
