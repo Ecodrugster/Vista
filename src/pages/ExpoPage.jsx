@@ -208,7 +208,10 @@ export function ExpoPage() {
                   isOver ? 'is-drag-over' : ''
                 }`}
               >
-                <div className="expo-order">#{index + 1}</div>
+                <div className="expo-order">
+                  <span className="drag-handle" aria-hidden="true">⋮⋮</span>
+                  <span>#{index + 1}</span>
+                </div>
 
                 <Link to={`/artwork/${work.id}`} className="expo-thumb">
                   <ArtworkImage

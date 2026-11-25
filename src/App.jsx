@@ -24,7 +24,10 @@ export default function App() {
               Поиск
             </NavLink>
             <NavLink to="/expo" className={({ isActive }) => (isActive ? 'nav-link is-active' : 'nav-link')}>
-              Моя выставка ({expo.ids.length}/{MAX_EXPO_ITEMS})
+              <span>Моя выставка</span>
+              <span className="nav-count">
+                {expo.ids.length}/{MAX_EXPO_ITEMS}
+              </span>
             </NavLink>
           </nav>
         </div>
