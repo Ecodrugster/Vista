@@ -328,6 +328,16 @@ a {
   );
 }
 
+.artwork-placeholder.has-lqip {
+  background: rgba(28, 26, 23, 0.25);
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+}
+
 .badge-in-expo,
 .badge-order {
   position: absolute;

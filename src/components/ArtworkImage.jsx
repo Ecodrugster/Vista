@@ -18,15 +18,16 @@ export function ArtworkImage({
   const [loadedSrc, setLoadedSrc] = useState(null);
   const [failedSrc, setFailedSrc] = useState(null);
 
-  const isLoaded = src && loadedSrc === src;
-  const isFailed = !src || failedSrc === src;
+  const isLoaded = Boolean(src && loadedSrc === src);
+  const isImageMissing = !src;
+  const isLoadError = Boolean(src && failedSrc === src);
 
   return (
     <div
       className={`artwork-frame ${className}`.trim()}
       style={{ aspectRatio: String(ratio) }}
     >
-      {!isFailed && lqip && !isLoaded && (
+      {!isImageMissing && lqip && !isLoaded && (
         <img
           src={lqip}
           alt=""
@@ -35,9 +36,17 @@ export function ArtworkImage({
         />
       )}
 
-      {isFailed ? (
+      {isImageMissing ? (
         <div className="artwork-placeholder" role="img" aria-label={alt}>
           <span>Нет изображения</span>
+        </div>
+      ) : isLoadError ? (
+        <div
+          className={`artwork-placeholder ${lqip ? 'has-lqip' : ''}`}
+          role="img"
+          aria-label={alt}
+        >
+          <span>{lqip ? 'Превью (IIIF 403)' : 'Изображение недоступно'}</span>
         </div>
       ) : (
         <img
