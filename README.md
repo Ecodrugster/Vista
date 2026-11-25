@@ -1,16 +1,48 @@
-# React + Vite
+# Своя выставка — виртуальная галерея (Вариант 17)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Многостраничное React-приложение для поиска произведений искусства в открытом API Чикагского института искусств (Art Institute of Chicago) и сборки собственной выставки (до 12 работ) с возможностью поделиться подборкой одной ссылкой.
 
-Currently, two official plugins are available:
+## Личный вариант № 17
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Тема по умолчанию (`q`)**: `gold`
+- **Цвет по умолчанию**: `blue`
+- **Задача варианта**: сортировка выставки по году создания (`date_start`), кнопка **«Хронологически»**
+- **Уровень**: Продвинутый (включает все требования базового, среднего и продвинутого уровней)
 
-## React Compiler
+## Возможности приложения
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Поиск (`/`)**:
+  - Подстановка темы `gold` и фильтра цвета `blue` по умолчанию.
+  - Сетка карточек с `aspect-ratio` из `thumbnail`, размытым превью `thumbnail.lqip` до загрузки полного изображения и заглушкой при отсутствии `image_id`.
+  - Отметка **«Уже в выставке»** на карточках, пагинация с учётом ограничения API в 10 000 результатов (`maxPage`), отмена устаревших запросов через `AbortController`.
+- **Карточка работы (`/artwork/:id`)**:
+  - Крупное изображение IIIF (`843px`, базовый адрес берётся из `config.iiif_url` ответа API), автор, дата, техника, отдел музея, кнопка «В выставку».
+- **Моя выставка (`/expo`)**:
+  - Состояние через `useReducer` (`expoReducer`) и сохранение в `localStorage` (`JSON.parse` в `try/catch`).
+  - Редактируемое название, перестановка карточек перетаскиванием (Drag & Drop) и кнопками `↑` / `↓`, удаление, кнопка **«Хронологически»** (сортировка по `date_start`), копирование ссылки.
+  - Режим **слайд-шоу**: переключение стрелками `←` / `→`, выход по `Esc`, предзагрузка следующего изображения.
+- **Просмотр по ссылке (`/expo/view?title=...&ids=...`)**:
+  - Загрузка всех работ выставки одним пакетным запросом `/artworks?ids=...`.
+- **Страница 404 (`*`)** и настройка `vercel.json` (`rewrites`) для SPA-маршрутизации.
+- **Слой API (`src/api/artic.js`)**:
+  - Кеш ответов в `Map`, очередь запросов не чаще 1 раза в секунду, обработка `429` с сообщением «Слишком много запросов, подождите минуту».
 
-## Expanding the ESLint configuration
+## Журнал данных (разведка реального API по `q=gold`)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Запрос: `GET https://api.artic.edu/api/v1/artworks/search?q=gold&fields=id,title,artist_display,date_display,date_start,image_id,thumbnail,color,department_title,medium_display&limit=50&page=1`
+
+1. **Отрицательный год создания (`date_start < 0`)** — работа `id: 594` (*Ring with a Scarab Bezel*, Древний Египет) имеет `date_start: -1985` (до н. э.). При хронологической сортировке отрицательные значения должны корректно идти раньше положительных, а отсутствующий `date_start` — в конец списка.
+2. **Высокий `h`, но нулевая насыщенность `s = 0`** — работа `id: 147192` (*Water Balance*, David Goldes) возвращает `color: { h: 95, l: 46, s: 0 }`. По одному `h = 95` работа попала бы в `green`, но так как `s < 15`, по контракту `hueBucket` это `gray` (чёрно-белая фотография).
+3. **Многострочный `artist_display` и лимит 10 000 результатов** — у работы `id: 2283` (*Snuff Box*, цвет `blue`, `h: 211, s: 44`) поле `artist_display` содержит 4 строки через `\n` (`"Jacob Frisard\nAustrian, 1753-1812\n..."`), поэтому `artistName` берёт только первую строку. При этом API сообщает `pagination.total: 133375`, но реально отдаёт максимум 10 000 результатов (`maxPage(133375, 24) = 416`).
+
+Сохранена выборка реальных ответов: `src/lib/fixtures/sample.json`.
+
+## Запуск и проверка
+
+```bash
+npm install
+npm run dev       # локальный сервер разработки
+npx vitest run    # 20 тестов (контракт src/lib/art.js + очередь и кеш src/api/artic.js)
+npm run lint      # проверка ESLint
+npm run build     # сборка для продакшена
+```
