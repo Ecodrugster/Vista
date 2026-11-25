@@ -60,12 +60,15 @@ export function createArticClient({ fetchImpl, minIntervalMs = 1000 } = {}) {
   let queueTail = Promise.resolve();
   let lastRequestAt = -Infinity;
 
-  function getFetch() {
-    const fn = fetchImpl ?? globalThis.fetch;
-    if (typeof fn !== 'function') {
+  function runFetch(url, signal) {
+    const init = signal ? { signal } : undefined;
+    if (fetchImpl) {
+      return fetchImpl(url, init);
+    }
+    if (typeof globalThis.fetch !== 'function') {
       throw new Error('fetch is not available');
     }
-    return fn;
+    return globalThis.fetch(url, init);
   }
 
   function enqueue(task, signal) {
@@ -99,7 +102,16 @@ export function createArticClient({ fetchImpl, minIntervalMs = 1000 } = {}) {
       if (cache.has(url)) {
         return cache.get(url);
       }
-      const res = await getFetch()(url, signal ? { signal } : undefined);
+      let res;
+      try {
+        res = await runFetch(url, signal);
+      } catch (err) {
+        if (err?.name === 'AbortError') throw err;
+        throw new Error(
+          'Не удалось подключиться к API музея (Failed to fetch). Проверьте интернет, отключите блокировщики/VPN или подождите минуту при общем IP.',
+          { cause: err },
+        );
+      }
       if (res.status === 429) {
         throw new Error(RATE_LIMIT_ERROR);
       }

@@ -23,6 +23,7 @@ export function SearchPage() {
   const urlColor = searchParams.get('color') ?? VARIANT.color;
 
   const [inputQuery, setInputQuery] = useState(urlQuery);
+  const [retryCount, setRetryCount] = useState(0);
   const [state, setState] = useState({
     key: '',
     items: [],
@@ -31,7 +32,7 @@ export function SearchPage() {
     error: '',
   });
 
-  const activeKey = `${urlQuery}::${urlPage}`;
+  const activeKey = `${urlQuery}::${urlPage}::${retryCount}`;
   const isLoading = state.key !== activeKey;
 
   useEffect(() => {
@@ -144,7 +145,7 @@ export function SearchPage() {
           <button
             type="button"
             className="btn btn-secondary"
-            onClick={() => updateSearch(urlQuery, urlPage, urlColor)}
+            onClick={() => setRetryCount((c) => c + 1)}
           >
             Повторить
           </button>
