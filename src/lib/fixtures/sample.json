@@ -1,0 +1,111 @@
+{
+  "pagination": {
+    "total": 133375,
+    "limit": 50,
+    "offset": 0,
+    "total_pages": 2668,
+    "current_page": 1
+  },
+  "config": {
+    "iiif_url": "https://www.artic.edu/iiif/2",
+    "website_url": "https://www.artic.edu"
+  },
+  "data": [
+    {
+      "_score": 68.19825,
+      "id": 594,
+      "title": "Ring with a Scarab Bezel",
+      "thumbnail": {
+        "lqip": "data:image/gif;base64,R0lGODlhBgAFAPQAAEZFMUpJNoCAfISDfp2WjZSUkp+ZkJuamKiZgKiagaueh6+hi66kla+mlq+nmrGpnbKwsbKxsrOysrSzs7KytLSztbSztrW0tLS0trW0trW1tgAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAGAAUAAAUY4FU5TzZZzKI0WIQMQjJpBBAYmUQVBwaFADs=",
+        "width": 2195,
+        "height": 1756,
+        "alt_text": "A work made of gold and green jasper."
+      },
+      "date_start": -1985,
+      "date_display": "Second Intermediate Period, Dynasty 15 (about 1650–1550 BCE)",
+      "artist_display": "Egyptian",
+      "medium_display": "Gold and green jasper",
+      "color": {
+        "h": 37,
+        "l": 46,
+        "s": 37,
+        "percentage": 0.0063303947156770676,
+        "population": 244
+      },
+      "department_title": "Arts of Africa",
+      "image_id": "d9067d6e-e133-705c-cf53-528c035a5201"
+    },
+    {
+      "_score": 40.671,
+      "id": 2283,
+      "title": "Snuff Box",
+      "thumbnail": {
+        "lqip": "data:image/gif;base64,R0lGODlhBgAFAPQAAHNcQ35qUol4Z5mDabKLdaqTfLGWfqGQgbmWhLCciqmjmq+on7OnlrSnlsXAu8HBvsbFwczHwsjIxsvMys7MyM3Ny9DPzNHPzNLQyNHSyNTU0tPV1NXW1NbW1AAAAAAAACH5BAAAAAAALAAAAAAGAAUAAAUY4KZhWcdRTEI0lzMYSBFJAhAc1vQoC1SFADs=",
+        "width": 2861,
+        "height": 2250,
+        "alt_text": "Oval golden box decorated with geometrical pattern and pearls, embracing a polychrome enamel miniature of a boy feeding birds."
+      },
+      "date_start": 1800,
+      "date_display": "Early 19th century",
+      "artist_display": "Jacob Frisard\nAustrian, 1753-1812\nT. F. Heil\nAustrian, Unknown",
+      "medium_display": "Gold, enamel, pearl",
+      "color": {
+        "h": 211,
+        "l": 56,
+        "s": 44,
+        "percentage": 0.0021470400369290885,
+        "population": 12
+      },
+      "department_title": "Applied Arts of Europe",
+      "image_id": "92fa3ef4-4cdf-e585-119a-6139be467358"
+    },
+    {
+      "_score": 57.803318,
+      "id": 147192,
+      "title": "Water Balance",
+      "thumbnail": {
+        "lqip": "data:image/gif;base64,R0lGODlhBgAFAPQAAFVVVVdXVnR1dHp6eK6vr7S0tLW1tbW1tri4t7/Av8XFxcfIx8nJy8rKyszMzM3NzNDQz9DQ0NHR0NTU1NbW19fX19fY2dnZ2Nzc3Nzd4ODg4ODg4eHh4erq6wAAAAAAACH5BAAAAAAALAAAAAAGAAUAAAUYYGZR2NYxSQNNXKE4klYRRnQ9ywEIQ4CEADs=",
+        "width": 3000,
+        "height": 2368,
+        "alt_text": "A work made of gelatin silver print."
+      },
+      "date_start": 1994,
+      "date_display": "1994",
+      "artist_display": "David Goldes\nAmerican, born 1947",
+      "medium_display": "Gelatin silver print",
+      "color": {
+        "h": 95,
+        "l": 46,
+        "s": 0,
+        "percentage": 0.01195158715293572,
+        "population": 67
+      },
+      "department_title": "Photography and Media",
+      "image_id": "5a65ed5e-20fc-6187-4ce1-7bf3978e8198"
+    },
+    {
+      "_score": 74.79095,
+      "id": 48662,
+      "title": "\"Gosh … It's Too Bad We Forgot the Camera ... Pass the Mustard ...!\", from the University of Wisconsin-Madison Print Seminar, March 1975 Portfolio",
+      "thumbnail": {
+        "lqip": "data:image/gif;base64,R0lGODlhBwAFAPUAAHt3UoWIZZGcf7GlhbWohrGpiJ+yr6Gzsqq+vsrTyNnWx+He1Nrg3e3p4urp5uns5uvu6ezt6e3v6vDv7O/w7vDw7fHw7fHx7vLy7vPz7/Tz7vTz8PP08fT08PX08Pb28fb29Pj39Pr6+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAHAAUAAAYhQAunEnlIHKAGoTBQUEQLQQCQ2IQgiIOBocl8MJeOZxIEADs=",
+        "width": 3000,
+        "height": 2066,
+        "alt_text": "A work made of color screenprint on white wove paper."
+      },
+      "date_start": 1975,
+      "date_display": "1975",
+      "artist_display": "Lawry Gold\nAmerican, born 1947",
+      "medium_display": "Color screenprint on white wove paper",
+      "color": {
+        "h": 52,
+        "l": 46,
+        "s": 81,
+        "percentage": 0.018988000808521324,
+        "population": 93
+      },
+      "department_title": "Prints and Drawings",
+      "image_id": "3eb8eea1-0d0e-2e41-731f-102633b6ee33"
+    }
+  ]
+}
