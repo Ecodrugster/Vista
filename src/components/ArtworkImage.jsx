@@ -44,6 +44,7 @@ export function ArtworkImage({
           src={src}
           alt={alt}
           loading={loading}
+          referrerPolicy="no-referrer"
           className={`artwork-img ${isLoaded ? 'is-loaded' : ''}`}
           onLoad={() => setLoadedSrc(src)}
           onError={() => setFailedSrc(src)}

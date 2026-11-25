@@ -61,7 +61,10 @@ export function createArticClient({ fetchImpl, minIntervalMs = 1000 } = {}) {
   let lastRequestAt = -Infinity;
 
   function runFetch(url, signal) {
-    const init = signal ? { signal } : undefined;
+    const init = { referrerPolicy: 'no-referrer' };
+    if (signal) {
+      init.signal = signal;
+    }
     if (fetchImpl) {
       return fetchImpl(url, init);
     }
